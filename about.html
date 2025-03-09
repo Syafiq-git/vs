@@ -1,0 +1,762 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/boxicons@latest/css/boxicons.min.css">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="index.css">
+    <style>
+        body {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        
+        .slider {
+            width: 80%;
+            max-width: 600px;
+            overflow: hidden;
+            border-radius: 10px;
+            margin-top: 5rem;
+        }
+        
+        .slides {
+            display: flex;
+            transition: transform 0.5s ease-in-out;
+        }
+        
+        .slides img {
+            width: 100%;
+            border-radius: 10px;
+        }
+        
+        @media (max-width: 768px) {
+            .slider {
+                width: 90%;
+                margin-top: 2rem;
+            }
+        }
+        
+        .icon-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 1rem;
+            width: 100%;
+            max-width: 900px;
+            margin-top: 1rem;
+        }
+        
+        .icon-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            padding: 1rem;
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s;
+        }
+        
+        .icon-item:hover {
+            transform: translateY(-5px);
+        }
+        
+        .icon-item i {
+            font-size: 2rem;
+            color: #04A0D2;
+            margin-bottom: 0.25rem;
+        }
+        
+        .icon-item span {
+            font-size: 0.75rem;
+            color: #333;
+        }
+        
+        .menu-koin {
+            width: 100%;
+            max-width: 900px;
+            padding: 16px;
+            margin-top: 1rem;
+        }
+        
+        .zontainer {
+            background-color: #02799e;
+            color: white;
+            border-radius: 16px;
+            padding: 16px;
+            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        
+        .saldo {
+            background-color: white;
+            color: #333;
+            border-radius: 10px;
+            padding: 12px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.1);
+            margin-bottom: 12px;
+        }
+        
+        .saldo img {
+            width: 30px;
+            height: 30px;
+        }
+        
+        .saldo div {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .saldo p {
+            margin: 0;
+            width: 60%;
+        }
+        
+        .saldo .total {
+            font-size: 14px;
+            font-weight: 500;
+            width: 100%;
+        }
+        
+        .total {
+            white-space: nowrap;
+        }
+        
+        .saldo .jumlah {
+            font-size: 18px;
+            font-weight: bold;
+        }
+        
+        .cek-riwayat {
+            font-size: 12px;
+            color: green;
+            font-weight: bold;
+            cursor: pointer;
+            width: 100%;
+            padding-left: 3rem;
+        }
+        
+        .menu-aksi {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 12px;
+        }
+        
+        .aksi-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 4px;
+            font-size: 12px;
+            margin: 0 2rem;
+        }
+        
+        .aksi-item div {
+            background-color: white;
+            border-radius: 50%;
+            box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.1);
+        }
+        
+        .aksi-item img {
+            width: 28px;
+            height: 28px;
+        }
+        
+        .aksi-item .topup {
+            border-radius: 12px;
+            transform: scale(1.1);
+            box-shadow: 0px 3px 8px rgba(0, 0, 0, 0.2);
+        }
+        
+        .nav__img {
+            margin-right: 2rem;
+        }
+        
+        a,
+        a:visited {
+            color: #555;
+            outline: none;
+            text-decoration: none;
+        }
+        
+        a:hover,
+        a:focus,
+        a:visited:hover {
+            color: #22a1c4;
+            text-decoration: none;
+        }
+        
+        @keyframes slideDown {
+            0% {
+                opacity: 0;
+                transform: translateY(-10%)
+            }
+            100% {
+                opacity: 1;
+                transform: translateY(0%)
+            }
+        }
+        
+        @keyframes change_color {
+            0% {
+                background: #5ac7da
+            }
+            33.33% {
+                background: #3173bd
+            }
+            66.66% {
+                background: #0d4a8d
+            }
+            100% {
+                background: #5ac7da
+            }
+        }
+        
+        @keyframes run_hari18 {
+            0% {
+                transform: translate(0%, 0)
+            }
+            50% {
+                transform: translate(100%, 0)
+            }
+            50.01% {
+                transform: translate(-100%, 0)
+            }
+        }
+        
+        @keyframes sun_movement {
+            0% {
+                top: 50px
+            }
+            20% {
+                top: -30px
+            }
+            25% {
+                top: -30px
+            }
+            40% {
+                top: 50px
+            }
+        }
+        
+        @keyframes run_malam18 {
+            0% {
+                transform: translate(-20%, 0);
+                opacity: 0
+            }
+            49.99% {
+                transform: translate(0%, 0);
+                opacity: 1
+            }
+            99.99% {
+                transform: translate(20%, 0);
+                opacity: 0
+            }
+            100% {
+                transform: translate(-20%, 0);
+                opacity: 1
+            }
+        }
+        
+        @keyframes moon_movement {
+            0% {
+                transform: translate(-200%, 0);
+                opacity: 0
+            }
+            49.99% {
+                transform: translate(0%, 0);
+                opacity: 1
+            }
+            99.99% {
+                transform: translate(200%, 0);
+                opacity: 0
+            }
+            100% {
+                transform: translate(-200%, 0);
+                opacity: 1
+            }
+        }
+        /* Pop Up Ramadhan */
+        
+        #popuppuasa18 {
+            display: block;
+            background: #fff;
+            /* Hapus position: fixed */
+            position: relative;
+            top: 0;
+            /* Hapus juga top agar mengikuti alur normal */
+            right: auto;
+            /* Biarkan default */
+            left: auto;
+            /* Biarkan default */
+            margin: 20px auto;
+            /* Tambahkan jarak dari elemen lain */
+            text-align: center;
+            max-width: 660px;
+            box-shadow: 0 19px 38px rgba(0, 0, 0, 0.1), 0 15px 12px rgba(0, 0, 0, 0.12);
+            z-index: 1;
+            /* Pastikan tidak menumpuk elemen lain */
+            min-height: 350px;
+            padding: 20px;
+            overflow: hidden;
+            border-radius: 10px;
+            animation: change_color 5s infinite linear, slideDown 2s;
+        }
+        
+        #popuppuasa18 .puasa18 {
+            position: absolute;
+            color: #fff;
+            font-size: 2rem;
+            font-weight: 400;
+            padding: 30px;
+            z-index: 99999;
+            text-align: center;
+            margin: auto;
+            left: 0;
+            right: 0;
+            top: 20%
+        }
+        
+        #popuppuasa18 .puasa18 p {
+            margin: 20px auto;
+            text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2)
+        }
+        
+        #popuppuasa18 .puasa18 .ramadhan18 {
+            font-size: 3rem;
+            font-weight: 700
+        }
+        
+        #popuppuasa18 a.close-popup {
+            position: absolute;
+            bottom: 15px;
+            right: 20px;
+            color: #fff;
+            text-align: center;
+            border-radius: 100%;
+            cursor: pointer;
+            z-index: 99;
+            transition: all .3s
+        }
+        
+        #popuppuasa18 a.close-popup:hover {
+            color: #fff
+        }
+        
+        #popuppuasa18 a.close-popup:active {
+            opacity: 0
+        }
+        
+        #popuppuasa18 a.close-popup i {
+            font-family: fontawesome;
+            font-size: 20px;
+            font-weight: normal;
+            font-style: normal;
+            transform: rotate(270deg);
+            transition: all .3s
+        }
+        
+        #popuppuasa18 a.close-popup:hover i {
+            transform: rotate(360deg)
+        }
+        
+        .gunung18 {
+            width: 400px;
+            height: 300px;
+            display: block;
+            background: #4aad52;
+            position: absolute;
+            bottom: -150px;
+            transform: rotate(45deg);
+            border-radius: 50px
+        }
+        
+        .gunung18.behind {
+            background: #42a54a;
+            right: -120px;
+            bottom: -180px;
+            z-index: -1
+        }
+        
+        .hari18 {
+            width: 100%;
+            height: 100%;
+            display: block;
+            position: absolute;
+            top: 0;
+            left: 0;
+            animation: run_hari18 5s infinite linear
+        }
+        
+        .hari18 .awan18 {
+            margin: 30px auto;
+            width: 150px;
+            height: 70px;
+            display: block;
+            background: #e7e7e7;
+            border-radius: 35px;
+            border: 10px solid #ffffff;
+            box-shadow: inset 0 -7px 0 0 #d7d7d7;
+            position: absolute;
+            top: 90px;
+            left: 50px
+        }
+        
+        .hari18 .awan18:before {
+            content: '';
+            width: 65px;
+            height: 35px;
+            display: block;
+            background: #e7e7e7;
+            border-radius: 35px 35px 0 0;
+            border: 10px solid #ffffff;
+            border-bottom: 0;
+            position: absolute;
+            top: -35px;
+            left: 20px
+        }
+        
+        .hari18 .awan18.invert {
+            top: 60px;
+            left: 250px
+        }
+        
+        .hari18 .awan18.invert:before {
+            left: 50px
+        }
+        
+        .hari18 .sun {
+            width: 75px;
+            height: 75px;
+            display: block;
+            background: #fff297;
+            border-radius: 50%;
+            box-shadow: inset -5px -5px 0 0 #ddc991;
+            position: absolute;
+            top: 50px;
+            left: 0;
+            animation: sun_movement 5s infinite linear
+        }
+        
+        .malam18 {
+            width: 100%;
+            height: 100%;
+            display: block;
+            position: absolute;
+            top: 0;
+            left: 0;
+            animation: run_malam18 5s infinite linear
+        }
+        
+        .malam18 .bintang18 .star {
+            width: 5px;
+            height: 5px;
+            display: block;
+            background: #f7f7f7;
+            border-radius: 50%;
+            position: absolute
+        }
+        
+        .malam18 .bintang18 .star:nth-child(1) {
+            top: 50px;
+            left: 50px
+        }
+        
+        .malam18 .bintang18 .star:nth-child(2) {
+            top: 200px;
+            left: 70px
+        }
+        
+        .malam18 .bintang18 .star:nth-child(3) {
+            top: 100px;
+            left: 300px
+        }
+        
+        .malam18 .bintang18 .star:nth-child(4) {
+            top: 50px;
+            left: 220px
+        }
+        
+        .malam18 .bintang18 .star:nth-child(5) {
+            top: 160px;
+            left: 320px
+        }
+        
+        .malam18 .bintang18 .star:nth-child(6) {
+            top: 150px;
+            left: 230px
+        }
+        
+        .malam18 .bintang18 .star:nth-child(7) {
+            top: 180px;
+            left: 400px
+        }
+        
+        .malam18 .bintang18 .star:nth-child(8) {
+            top: 50px;
+            left: 360px
+        }
+        
+        .malam18 .moon {
+            width: 75px;
+            height: 75px;
+            display: block;
+            background: #d7d7d7;
+            border-radius: 50%;
+            box-shadow: inset -5px -5px 0 0 #c7c7c7;
+            position: absolute;
+            top: 50px;
+            left: 100px;
+            animation: moon_movement 5s infinite linear
+        }
+        
+        @media (max-width:800px) {
+            #popuppuasa18 {
+                top: 10px!important;
+                left: 10px;
+                right: 10px;
+                min-height: 250px
+            }
+            #popuppuasa18 .puasa18 {
+                font-size: 1.1rem;
+                top: 0
+            }
+            #popuppuasa18 .puasa18 .ramadhan18 {
+                font-size: 2.5rem
+            }
+            .gunung18 {
+                display: none
+            }
+            .hari18,
+            .bintang18,
+            .malam18 .moon {
+                display: inline
+            }
+            #popuppuasa18 a.close-popup {
+                z-index: 999999
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <header class="header" id="header">
+        <nav class="nav container">
+            <a href="#" class="nav__logo">codeweb.id | syafiq</a>
+
+            <div class="nav__menu" id="nav-menu">
+                <ul class="nav__list">
+                    <li class="nav__item">
+                        <a href="index.html" class="nav__link ">
+                            <i class='bx bx-home-alt nav__icon'></i>
+                            <span class="nav__name">Home</span>
+                        </a>
+                    </li>
+
+                    <li class="nav__item">
+                        <a href="about.html" class="nav__link active-link">
+                            <i class='bx bx-user nav__icon'></i>
+                            <span class="nav__name">About</span>
+                        </a>
+                    </li>
+
+                    <li class="nav__item">
+                        <a href="#skills" class="nav__link">
+                            <i class='bx bx-award nav__icon'></i>
+                            <span class="nav__name">Skills</span>
+                        </a>
+                    </li>
+
+                    <li class="nav__item">
+                        <a href="#portfolio" class="nav__link">
+                            <i class='bx bx-briefcase-alt nav__icon'></i>
+                            <span class="nav__name">Portfolio</span>
+                        </a>
+                    </li>
+
+                    <li class="nav__item">
+                        <a href="#contactme" class="nav__link">
+                            <i class='bx bx-message-square-detail nav__icon'></i>
+                            <span class="nav__name">Contactme</span>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+
+            <img src="logonew-removebg-preview (1).png" alt="" class="nav__img">
+        </nav>
+    </header>
+    <div class="slider" style="margin-top: 4rem;">
+        <div class="slides">
+            <img src="mosque.png" alt="Slide 1">
+            <img src="https://via.placeholder.com/600x400?text=Slide+2" alt="Slide 2">
+            <img src="https://via.placeholder.com/600x400?text=Slide+3" alt="Slide 3">
+        </div>
+    </div>
+    <section class="menu-koin">
+        <div class="zontainer">
+            <!-- Bagian Saldo -->
+            <div class="saldo">
+                <div>
+                    <img src="https://cdn-icons-png.flaticon.com/512/2890/2890330.png" alt="Koin">
+                    <div>
+                        <p class="total">Total pahala :</p>
+                        <p class="jumlah">0</p>
+                    </div>
+                </div>
+                <p class="cek-riwayat">Klik & cek Riwayat</p>
+            </div>
+
+            <!-- Menu Aksi -->
+            <div class="menu-aksi">
+                <div class="aksi-item">
+                    <div>
+                        <img src="https://cdn-icons-png.flaticon.com/512/1828/1828919.png" alt="Bayar">
+                    </div>
+                    <p>Bayar</p>
+                </div>
+
+                <div class="aksi-item">
+                    <div>
+                        <img src="https://cdn-icons-png.flaticon.com/512/1828/1828919.png" alt="Top Up">
+                    </div>
+                    <p>Top Up</p>
+                </div>
+
+                <div class="aksi-item">
+                    <div>
+                        <img src="https://cdn-icons-png.flaticon.com/512/1828/1828919.png" alt="Eksplor">
+                    </div>
+                    <p>Eksplor</p>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Tambahkan section baru DI LUAR slider -->
+    <section class="about">
+        <div class="icon-grid">
+            <div class="icon-item">
+                <i class='bx bx-book-open'></i>
+                <span>Al Qur'an</span>
+            </div>
+            <div class="icon-item">
+                <i class='bx bx-calculator'></i>
+                <span>zakat</span>
+            </div>
+            <div class="icon-item">
+                <i class='bx bx-donate-heart'></i>
+                <span>Sedekah</span>
+            </div>
+
+            <div class="icon-item">
+                <i class='bx bx-moon'></i>
+                <span>Ramadhan</span>
+            </div>
+            <div class="icon-item">
+                <i class='bx bx-time-five'></i>
+                <span>sholat</span>
+            </div>
+            <div class="icon-item">
+                <i class='bx bx-diamond'></i>
+                <span>Zikir</span>
+            </div>
+            <div class="icon-item">
+                <i class='bx bx-alarm'></i>
+                <span>Imsak</span>
+            </div>
+            <div class="icon-item">
+                <i class='bx bx-chat'></i>
+                <span>contact me</span>
+            </div>
+        </div>
+
+        <div id='popuppuasa18' style="margin-right: 1.3rem;">
+            <a class='close-popup' href='#' title='close'><i class='fa fa-times'></i></a>
+            <div class='puasa18'>
+                <p>Selamat Menunaikan Ibadah Puasa</p>
+                <p><span class='ramadhan18'>Ramadhan 1439 H</span></p>
+            </div>
+            <div class='gunung18'></div>
+            <div class='gunung18 behind'></div>
+            <div class='hari18'>
+                <div class='awan18'></div>
+                <div class='awan18 invert'></div>
+                <div class='sun'></div>
+            </div>
+            <div class='malam18'>
+                <div class='bintang18'>
+                    <div class='star'></div>
+                    <div class='star'></div>
+                    <div class='star'></div>
+                    <div class='star'></div>
+                    <div class='star'></div>
+                    <div class='star'></div>
+                    <div class='star'></div>
+                    <div class='star'></div>
+                </div>
+                <div class='moon'></div>
+            </div>
+        </div>
+
+    </section>
+
+
+    <script>
+        const slides = document.querySelector('.slides');
+        const images = document.querySelectorAll('.slides img');
+        let index = 0;
+        const intervalTime = 3000;
+
+        function nextSlide() {
+            index++;
+            if (index >= images.length) {
+                index = 0;
+            }
+            slides.style.transform = `translateX(${-index * 100}%)`;
+        }
+
+        setInterval(nextSlide, intervalTime);
+
+        let startX;
+        let isDragging = false;
+
+        slides.addEventListener('touchstart', (e) => {
+            startX = e.touches[0].clientX;
+            isDragging = true;
+        });
+
+        slides.addEventListener('touchmove', (e) => {
+            if (!isDragging) return;
+            const touch = e.touches[0];
+            const moveX = touch.clientX - startX;
+            slides.style.transform = `translateX(${-index * 100 + moveX / slides.clientWidth * 100}%)`;
+        });
+
+        slides.addEventListener('touchend', (e) => {
+            isDragging = false;
+            const endX = e.changedTouches[0].clientX;
+            const moveX = endX - startX;
+            if (moveX > 50) {
+                index--;
+                if (index < 0) {
+                    index = images.length - 1;
+                }
+            } else if (moveX < -50) {
+                index++;
+                if (index >= images.length) {
+                    index = 0;
+                }
+            }
+            slides.style.transform = `translateX(${-index * 100}%)`;
+        });
+    </script>
+</body>
+
+</html>
